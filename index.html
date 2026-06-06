@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Various Digital Graphics | Premium Design & Visual HOME</title>
+    <style>
+        /* --- SYSTEM DESIGN SYSTEM & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: #131a26;
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.4);
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.3);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- STICKY TRANSPARENT NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(9, 13, 22, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Dynamic Nav Logo (Non-hardcoded asset structural wrapper) */
+        .nav-logo-slot {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links .active {
+            color: var(--text-main);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+        }
+
+        /* --- CINEMATIC GIGANTIC HERO SECTION --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem 2rem;
+            background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* The Gigantic Dynamic Logo Brand Canvas */
+        .hero-logo-display {
+            margin-bottom: 2.5rem;
+            display: inline-block;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff 40%, #cbd5e1 70%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 3rem auto;
+        }
+
+        /* --- PORTFOLIO & IMAGE EXHIBITION --- */
+        .showcase-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Clean High-Resolution Modular Grid Layout */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+        }
+
+        /* Custom structural sizing metrics to create high-end staggered layouts */
+        .item-large { grid-column: span 8; }
+        .item-small { grid-column: span 4; }
+        .item-medium { grid-column: span 6; }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--primary-glow);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover .img-container img {
+            transform: scale(1.05);
+        }
+
+        .item-meta {
+            padding: 2rem;
+            background: linear-gradient(to top, var(--bg-card) 80%, transparent);
+        }
+
+        .item-meta span {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .item-meta h3 {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--text-main);
+        }
+
+        /* --- PREMIUM CAPABILITIES CORE --- */
+        .capabilities {
+            background: linear-gradient(to bottom, #090d16, #0e1422, #090d16);
+            padding: 8rem 2rem;
+        }
+
+        .capabilities-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .caps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .cap-card {
+            background: rgba(19, 26, 38, 0.4);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+            padding: 3rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cap-card:hover {
+            background: rgba(19, 26, 38, 0.8);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cap-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cap-card p {
+            color: var(--text-muted);
+        }
+
+        /* --- INFINITE BRAND MARQUEE --- */
+        .marquee-container {
+            background: #0d1321;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 4rem;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-track h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        /* --- FOOTER EXPANSE --- */
+        footer {
+            background-color: #05070c;
+            padding: 5rem 2rem 2rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(2, 1fr);
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            max-width: 350px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMATIONS & INTERACTIVE MEDIA QUERIES --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-item.item-large, 
+            .portfolio-item.item-small, 
+            .portfolio-item.item-medium {
+                grid-column: span 12;
+            }
+            .hero h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-btn { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="site-header">
+        <div class="nav-container">
+            <div class="nav-logo-slot" id="navbar-logo-target"></div>
+            
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">HOME</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+            </ul>
+            <a href="#contact" class="nav-btn">Launch Project</a>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-logo-display" id="hero-gigantic-logo-target"></div>
+            <h1>The New Standard of Digital Graphics Architectural Design</h1>
+            <p>We forge premium visual HOMEs, complex multi-dimensional brand strategies, and ultra-crisp interfaces for forward-thinking enterprises.</p>
+            <a href="#showcase" class="nav-btn" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Explore Showcase Grid</a>
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <h2>• VECTOR ARCHITECTURE • VISUAL HOMES • MOTION SYSTEMS • BRAND IDENTITY • INTERFACE DESIGN • GENERATIVE ENGINE</h2>
+            <h2>• VECTOR ARCHITECTURE • VISUAL HOMES • MOTION SYSTEMS • BRAND IDENTITY • INTERFACE DESIGN • GENERATIVE ENGINE</h2>
+        </div>
+    </div>
+
+    <section class="showcase-section" id="showcase">
+        <div class="section-header">
+            <h2>The Production Matrix</h2>
+            <p>Impeccable, real-world case studies demonstrating absolute visual dominance.</p>
+        </div>
+        
+        <div class="portfolio-grid">
+            
+            <div class="portfolio-item item-large">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="Abstract fluid render">
+                </div>
+                <div class="item-meta">
+                    <span>Brand System</span>
+                    <h3>Neoteric Fluid Architecture Guidelines</h3>
+                </div>
+            </div>
+
+            <div class="portfolio-item item-small">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=600&q=80" alt="Geometric 3D artwork">
+                </div>
+                <div class="item-meta">
+                    <span>3D Vector Asset</span>
+                    <h3>Hyper-Dimensional Geometry</h3>
+                </div>
+            </div>
+
+            <div class="portfolio-item item-medium">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Cyberpunk infrastructure layout">
+                </div>
+                <div class="item-meta">
+                    <span>UI Architecture</span>
+                    <h3>Quantum Core Dashboard Matrix</h3>
+                </div>
+            </div>
+
+            <div class="portfolio-item item-medium">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?auto=format&fit=crop&w=800&q=80" alt="Complex typographic code mapping">
+                </div>
+                <div class="item-meta">
+                    <span>Motion Assets</span>
+                    <h3>Kinetic Code Typography Sequence</h3>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="capabilities" id="capabilities">
+        <div class="capabilities-inner">
+            <div class="section-header">
+                <h2>Operational Frameworks</h2>
+                <p>Advanced digital delivery built across scalable operational vector structures.</p>
+            </div>
+
+            <div class="caps-grid">
+                <div class="cap-card">
+                    <div class="cap-icon">🌌</div>
+                    <h3>Generative Brand Engines</h3>
+                    <p>We deploy systematic design guidelines that organically morph, adapt, and scale smoothly across printing presses, mobile applications, and physical spatial environments.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon">📈</div>
+                    <h3>High-Fidelity Vector Tech</h3>
+                    <p>Ultra-crisp visual nodes and geometric structural alignments built mathematical formula-perfect, ensuring total infinite resolution capability without artifacts.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon">⚡</div>
+                    <h3>Interactive System Layouts</h3>
+                    <p>Human-centered user interface arrays constructed precisely to process, optimize, and convert analytical operations into highly accessible layouts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div id="footer-logo-target"></div>
+                <p>Architecting pristine modern aesthetics for global technological and artistic industries since 2026.</p>
+            </div>
+            <div class="footer-column">
+                <h4>HOME Hub</h4>
+                <ul>
+                    <li><a href="#hero">Overview Map</a></li>
+                    <li><a href="#showcase">Production Matrix</a></li>
+                    <li><a href="#capabilities">System Frameworks</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Connect Nodes</h4>
+                <ul>
+                    <li><a href="#">Secure Matrix API</a></li>
+                    <li><a href="#">Vector Repository</a></li>
+                    <li><a href="#">Terminal Comms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Various Digital Graphics. Engineered globally.</p>
+            <p>System Standard 4.10.6</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * LOGO SPECIFICATION CONFIGURATION (NON HARD-CODED ASSET CONTROLLER)
+         * This centralized system handles the generation of our premium, scalable vector logo assets.
+         * To swap this out for an external source, just assign the URL property.
+         */
+        const LOGO_ENGINE = {
+            useExternalImage: false, 
+            externalImageUrl: "", 
+            
+            // Scalable Vector Blueprint definition used across the application framework
+            svgBlueprint: `
+                <svg width="100%" height="100%" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+                    <defs>
+                        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#2563eb" />
+                            <stop offset="100%" stop-color="#1d4ed8" />
+                        </linearGradient>
+                        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#10b981" />
+                            <stop offset="100%" stop-color="#059669" />
+                        </linearGradient>
+                        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="8" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    <g transform="translate(10, 10)">
+                        <rect x="25" y="10" width="32" height="85" rx="8" transform="skewX(-22)" fill="url(#blueGrad)" filter="url(#neonGlow)"/>
+                        <rect x="58" y="10" width="32" height="85" rx="8" transform="skewX(22)" fill="url(#emeraldGrad)" style="mix-blend-mode: screen;" filter="url(#neonGlow)"/>
+                        <circle cx="58" cy="88" r="10" fill="#ffffff" filter="url(#neonGlow)"/>
+                    </g>
+                    <text x="145" y="58" fill="#ffffff" font-family="'Inter', system-ui, sans-serif" font-size="42" font-weight="900" letter-spacing="2">VARIOUS</text>
+                    <text x="145" y="92" fill="#94a3b8" font-family="'Inter', system-ui, sans-serif" font-size="22" font-weight="600" letter-spacing="11">DIGITAL GRAPHICS</text>
+                </svg>
+            `
+        };
+
+        // Execution and dynamic insertion engine
+        window.addEventListener('DOMContentLoaded', () => {
+            const navTarget = document.getElementById('navbar-logo-target');
+            const heroTarget = document.getElementById('hero-gigantic-logo-target');
+            const footerTarget = document.getElementById('footer-logo-target');
+
+            function injectAsset(targetElement, widthStyle) {
+                if (!targetElement) return;
+                
+                if (LOGO_ENGINE.useExternalImage && LOGO_ENGINE.externalImageUrl !== "") {
+                    // Injecting as external non hard-coded asset image node
+                    targetElement.innerHTML = `<img src="${LOGO_ENGINE.externalImageUrl}" style="width:${widthStyle}; height:auto;" alt="Various Digital Graphics">`;
+                } else {
+                    // Injecting structural vector component directly into DOM layout 
+                    targetElement.innerHTML = `<div style="width:${widthStyle}; display:inline-block;">${LOGO_ENGINE.svgBlueprint}</div>`;
+                }
+            }
+
+            // Distribute architectural logo instances dynamically into specific UI matrix zones
+            injectAsset(navTarget, "240px");       // Small clean layout for sticky navigation header
+            injectAsset(heroTarget, "580px");      // Gigantic cinematic display inside landing viewport
+            injectAsset(footerTarget, "260px");    // Medium stylized execution block for footer visibility
+        });
+
+        // Dynamic Navigation background color transitions upon scroll execution
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('site-header');
+            if (window.scrollY > 50) {
+                header.style.padding = "0.8rem 2rem";
+                header.style.background = "rgba(5, 7, 12, 0.95)";
+                header.style.boxShadow = "0 20px 30px rgba(0,0,0,0.7)";
+            } else {
+                header.style.padding = "1.25rem 2rem";
+                header.style.background = "rgba(9, 13, 22, 0.8)";
+                header.style.boxShadow = "none";
+            }
+        });
+    </script>
+</body>
+</html>

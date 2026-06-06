@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Dashboard | Contact Various Digital Graphics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: #131a26;
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.4);
+            --accent: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(9, 13, 22, 0.95);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links .active {
+            color: var(--text-main);
+        }
+
+        /* --- CONTACT DASHBOARD AREA --- */
+        .contact-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 10rem auto 4rem auto;
+            padding: 0 2rem;
+            flex: 1;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            background: radial-gradient(top left, rgba(37, 99, 235, 0.05), transparent);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            padding: 4rem;
+        }
+
+        .info-panel h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .info-panel p {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .info-tile {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .info-details label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .info-details span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Form styling */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group textarea {
+            background: rgba(9, 13, 22, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--text-main);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .form-submit-btn {
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            align-self: flex-start;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #05070c;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-media-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .social-icon-link svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-muted);
+        }
+
+        .social-icon-link:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .social-icon-link:hover svg { fill: #fff; }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid { grid-template-columns: 1fr; padding: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .footer-container p { display: none; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-container { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- FIXED NAVBAR --- -->
+    <header>
+        <div class="nav-container">
+            <div id="navbar-logo-target"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Back</a></li>
+                <li><a href="contact.html" class="active">Terminal Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- --- DASHBOARD MATRIX CONTENT --- -->
+    <main class="contact-wrapper">
+        <div class="dashboard-grid">
+            <div class="info-panel">
+                <h2>Initialize Connection</h2>
+                <p>Have a complex corporate visual request? Sync directly with our node endpoints.</p>
+                
+                <div class="info-tile">
+                    <div class="info-icon">📡</div>
+                    <div class="info-details">
+                        <label>Secure Comms</label>
+                        <span>hello@variousgraphics.digital</span>
+                    </div>
+                </div>
+                <div class="info-tile">
+                    <div class="info-icon">🏢</div>
+                    <div class="info-details">
+                        <label>Physical Node</label>
+                        <span>Silicon Core Hub, Suite 404</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Transmission Matrix Successful!');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Identity Name</label>
+                        <input type="text" id="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Routing Email</label>
+                        <input type="email" id="email" placeholder="john@domain.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Project Directive / Scope</label>
+                    <input type="text" id="subject" placeholder="Brand Ecosystem Setup" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Detailed Parameters</label>
+                    <textarea id="message" rows="6" placeholder="Describe your design scale requirement..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit-btn">Transmit Request</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- --- FOOTER --- -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 Various Digital Graphics.</p>
+            <div class="social-media-container">
+                <a href="#" class="social-icon-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M9 8H7v3h2v9h3v-9h3l.5-3H12V6c0-.88.77-1 1-1h2V2h-3c-2.9 0-5 1.79-5 4.8V8z"/></svg>
+                </a>
+                <a href="#" class="social-icon-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <a href="#" class="social-icon-link" aria-label="X (Twitter)">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- --- DYNAMIC LOGO INJECTION ENGINE --- -->
+    <script>
+        const LOGO_BLUEPRINT = `
+            <svg width="100%" height="100%" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+                <defs>
+                    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2563eb" /><stop offset="100%" stop-color="#1d4ed8" /></linearGradient>
+                    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10b981" /><stop offset="100%" stop-color="#059669" /></linearGradient>
+                    <filter id="neonGlow"><feGaussianBlur stdDeviation="8" result="blur" /><feComposite in="SourceGraphic" in2="blur" operator="over" /></filter>
+                </defs>
+                <g transform="translate(10, 10)">
+                    <rect x="25" y="10" width="32" height="85" rx="8" transform="skewX(-22)" fill="url(#blueGrad)" filter="url(#neonGlow)"/>
+                    <rect x="58" y="10" width="32" height="85" rx="8" transform="skewX(22)" fill="url(#emeraldGrad)" style="mix-blend-mode: screen;" filter="url(#neonGlow)"/>
+                    <circle cx="58" cy="88" r="10" fill="#ffffff" filter="url(#neonGlow)"/>
+                </g>
+                <text x="145" y="58" fill="#ffffff" font-family="'Inter', system-ui, sans-serif" font-size="42" font-weight="900" letter-spacing="2">VARIOUS</text>
+                <text x="145" y="92" fill="#94a3b8" font-family="'Inter', system-ui, sans-serif" font-size="22" font-weight="600" letter-spacing="11">DIGITAL GRAPHICS</text>
+            </svg>`;
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('navbar-logo-target').innerHTML = `<a href="index.html" style="width:240px; display:inline-block;">${LOGO_BLUEPRINT}</a>`;
+        });
+    </script>
+</body>
+</html>
